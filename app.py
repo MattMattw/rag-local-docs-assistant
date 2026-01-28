@@ -40,49 +40,50 @@ embeddings = OllamaEmbeddings(
 
 
 # =========================
-# 4. CARICAMENTO PDF CON PYMUPDF
+# 4. CARICAMENTO DOCUMENTI
 # =========================
 
 documents = []
 
 for filename in os.listdir(DATA_FOLDER):
     if filename.lower().endswith(".pdf"):
+        # Load PDF files with PyMuPDF
         file_path = os.path.join(DATA_FOLDER, filename)
         print(f"Loading PDF: {file_path}")
         
-        # Use PyMuPDF instead of PyPDFLoader for better text extraction
         pdf_document = fitz.open(file_path)
         
         for page_num, page in enumerate(pdf_document, start=1):
             text = page.get_text()
             
-            # Clean up the text - remove common TOC patterns and junk
-            lines = text.split('\n')
-            cleaned_lines = []
+            # Minimal cleanup - just strip whitespace
+            text = text.strip()
             
-            for line in lines:
-                stripped = line.strip()
-                # Skip empty lines, page numbers, dots (TOC), and lines that are too short
-                if not stripped or stripped.isdigit() or all(c == '.' or c.isspace() for c in line):
-                    continue
-                # Skip lines that look like TOC entries (mostly dots)
-                if len(stripped) < 2 or stripped.count('.') > len(stripped) // 2:
-                    continue
-                cleaned_lines.append(stripped)
-            
-            text = '\n'.join(cleaned_lines).strip()
-            
-            # Only add pages with substantial content
-            if len(text) > 100:  # More than 100 chars
+            # Add all non-empty pages
+            if text:
                 documents.append(Document(
                     page_content=text,
                     metadata={"page": page_num, "source": filename}
                 ))
         
         pdf_document.close()
+    
+    elif filename.lower().endswith(".txt"):
+        # Load text files
+        file_path = os.path.join(DATA_FOLDER, filename)
+        print(f"Loading TEXT: {file_path}")
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        if content.strip():
+            documents.append(Document(
+                page_content=content,
+                metadata={"page": 1, "source": filename}
+            ))
 
 if not documents:
-    raise ValueError("Nessun PDF trovato nella cartella 'data/'")
+    raise ValueError("Nessun documento trovato nella cartella 'data/' (PDF o TXT)")
 
 print(f"Loaded {len(documents)} pages")
 
@@ -105,10 +106,21 @@ print(f"Created {len(chunks)} text chunks")
 # 6. VECTOR STORE (FAISS)
 # =========================
 
-vectorstore = FAISS.from_documents(
-    documents=chunks,
-    embedding=embeddings
-)
+VECTORSTORE_PATH = "vectorstore"
+
+# Try to load existing vectorstore, otherwise create new one
+try:
+    print("Loading existing vectorstore...")
+    vectorstore = FAISS.load_local(VECTORSTORE_PATH, embeddings, allow_dangerous_deserialization=True)
+    print("Vectorstore loaded!")
+except:
+    print("Creating new vectorstore (this may take a while)...")
+    vectorstore = FAISS.from_documents(
+        documents=chunks,
+        embedding=embeddings
+    )
+    vectorstore.save_local(VECTORSTORE_PATH)
+    print("Vectorstore created and saved!")
 
 retriever = vectorstore.as_retriever(
     search_kwargs={"k": TOP_K},

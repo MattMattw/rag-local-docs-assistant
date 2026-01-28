@@ -1,0 +1,46 @@
+Che cos'è Bitcoin?
+
+Bitcoin è una criptovaluta decentralizzata e un sistema di pagamento peer-to-peer creato nel 2009 da una persona o un gruppo di persone con lo pseudonimo Satoshi Nakamoto. Bitcoin consente di inviare e ricevere denaro senza intermediari bancari.
+
+La rete Bitcoin funziona sulla tecnologia blockchain, un registro pubblico distribuito dove tutte le transazioni vengono registrate e verificate.
+
+Cos'è il Mining di Bitcoin?
+
+Il mining di Bitcoin è il processo attraverso il quale nuovi bitcoin vengono creati e le transazioni vengono verificate e aggiunte alla blockchain. I miner utilizzano potenti computer per risolvere complessi problemi matematici (Proof of Work). Chi risolve il problema per primo ha diritto a verificare un nuovo blocco di transazioni e riceve come ricompensa dei bitcoin appena creati.
+
+Il mining serve a:
+- Creare nuovi bitcoin
+- Verificare e confermare le transazioni
+- Proteggere la rete da attacchi
+
+Come funziona la Blockchain?
+
+La blockchain è un registro pubblico di tutte le transazioni Bitcoin. È divisa in blocchi, ognuno contenente un elenco di transazioni. Ogni blocco è collegato al blocco precedente tramite un hash crittografico, creando una catena di blocchi.
+
+La blockchain è immutabile perché modificare un blocco comporterebbe la modifica di tutti i blocchi successivi, il che renderebbe ovvio il tentativo di frode.
+
+Quali sono i vantaggi di Bitcoin?
+
+1. Decentralizzazione: nessun governo o banca centrale controlla Bitcoin
+2. Trasparenza: tutte le transazioni sono pubbliche e verificabili
+3. Sicurezza: la crittografia protegge le transazioni
+4. Rapidità: le transazioni possono essere effettuate velocemente a livello globale
+5. Basse commissioni: soprattutto per i trasferimenti internazionali
+
+Cosa è una chiave privata?
+
+Una chiave privata è una stringa di numeri e lettere che consente di accedere e spendere i bitcoin. È come una password: deve essere mantenuta segreta. Se qualcuno accede alla tua chiave privata, può rubare tutti i tuoi bitcoin.
+
+La chiave pubblica è derivata dalla chiave privata e viene utilizzata per ricevere bitcoin. A differenza della chiave privata, la chiave pubblica può essere condivisa.
+
+Cosa è un exchange di Bitcoin?
+
+Un exchange di Bitcoin è una piattaforma online dove gli utenti possono acquistare, vendere e scambiare bitcoin con denaro fiat (come EUR o USD) o altre criptovalute.
+
+Gli exchange fungono da intermediari tra i compratori e i venditori, facilitando le transazioni.
+
+Chi crea i nuovi Bitcoin?
+
+I nuovi bitcoin vengono creati attraverso il processo di mining. Approssimativamente ogni 10 minuti, viene estratto un nuovo blocco e i miner ricevono una ricompensa in bitcoin appena creati.
+
+Bitcoin ha un limite massimo di 21 milioni di coin, programmato nel codice fin dall'inizio. Questo rende Bitcoin una risorsa scarsa e decentralizzata.
